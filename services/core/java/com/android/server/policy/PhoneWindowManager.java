@@ -4257,7 +4257,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 if (DEBUG_INPUT) {
                     Log.d(TAG, "Dispatching navbar toogle " + enabled + " to handler " + mDeviceKeyHandler);
                 }
-                mDeviceKeyHandler.handleNavbarToggle(enabled);
+//                mDeviceKeyHandler.handleNavbarToggle(enabled);
             } catch (Exception e) {
                 Slog.w(TAG, "Could not dispatch navbar toggle to device key handler", e);
             }
