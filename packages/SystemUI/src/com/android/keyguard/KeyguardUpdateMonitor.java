@@ -24,6 +24,7 @@ import static android.os.BatteryManager.EXTRA_HEALTH;
 import static android.os.BatteryManager.EXTRA_LEVEL;
 import static android.os.BatteryManager.EXTRA_MAX_CHARGING_CURRENT;
 import static android.os.BatteryManager.EXTRA_MAX_CHARGING_VOLTAGE;
+import static android.os.BatteryManager.EXTRA_TEMPERATURE;
 import static android.os.BatteryManager.EXTRA_PLUGGED;
 import static android.os.BatteryManager.EXTRA_STATUS;
 import static android.os.BatteryManager.EXTRA_DASH_CHARGER;
@@ -734,7 +735,8 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
                 int maxChargingMicroVolt = intent.getIntExtra(EXTRA_MAX_CHARGING_VOLTAGE, -1);
                 final int maxChargingMicroWatt;
 
-                if (maxChargingMicroVolt <= 0) {
+	        final int temperature = intent.getIntExtra(EXTRA_TEMPERATURE, -1);
+		if (maxChargingMicroVolt <= 0) {
                     maxChargingMicroVolt = DEFAULT_CHARGING_VOLTAGE_MICRO_VOLT;
                 }
                 if (maxChargingMicroAmp > 0) {
@@ -751,7 +753,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
                 final Message msg = mHandler.obtainMessage(
                         MSG_BATTERY_UPDATE, new BatteryStatus(status, level, plugged, health,
                                 maxChargingMicroAmp, maxChargingMicroVolt, maxChargingMicroWatt,
-                                temperature, dashChargeStatus, turboPowerStatus));
+                                 temperature, dashChargeStatus, turboPowerStatus));
 
                 mHandler.sendMessage(msg);
             } else if (TelephonyIntents.ACTION_SIM_STATE_CHANGED.equals(action)) {
